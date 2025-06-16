@@ -2,18 +2,19 @@ class Solution {
 
     public int thirdMax(int[] nums) {
         
-        HashSet<Integer> numsSorted = new HashSet<>();
-
+        TreeSet<Integer> sortedSet = new TreeSet<>();
         for (int i : nums) {
-            numsSorted.add(i);
+            sortedSet.add(i);
         }
-        TreeSet<Integer> sortedSet = new TreeSet<>(numsSorted);
-        int[] Sorted = sortedSet.stream().mapToInt(Integer::intValue).toArray();
+        
 
-        if (Sorted.length < 3) {
-            return Sorted[Sorted.length - 1];
+        if (sortedSet.size() < 3) {
+            return sortedSet.last();
         }
 
-        return Sorted[Sorted.length - 3];
+        sortedSet.pollLast();
+        sortedSet.pollLast();
+
+        return sortedSet.last();
     }
 }
